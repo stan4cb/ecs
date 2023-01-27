@@ -15,6 +15,13 @@ namespace Game.Jobs
             var ro = myTestComponentAspect
                 .myTestComponent
                 .ValueRO;
+
+            var rotation = myTestComponentAspect.transformAspect.LocalRotation;
+            var rotated = math.rotate(rotation, ro.targetPosition * Delta);
+
+            myTestComponentAspect
+                .transformAspect
+                .RotateLocal(quaternion.Euler(rotated));
         }
     }
 }

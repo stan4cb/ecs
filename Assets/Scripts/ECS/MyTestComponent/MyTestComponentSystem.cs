@@ -4,6 +4,7 @@ using Unity.Entities;
 namespace Game
 {
     [BurstCompile]
+    [CreateAfter(typeof(SceneSetup))]
     [UpdateInGroup(typeof(SimulationSystemGroup))]
     public partial struct MyTestComponentSystem : ISystem
     {
@@ -22,10 +23,9 @@ namespace Game
             var sceneSetup = SystemAPI.GetSingletonEntity<SceneSetup>();
             var sceneSetupAspect = SystemAPI.GetAspectRW<SceneSetupAspect>(sceneSetup);
 
-
-            new Jobs.LerpRotationSin
+            new Jobs.Rotation
             {
-                Time = (float)SystemAPI.Time.ElapsedTime
+                Delta = SystemAPI.Time.DeltaTime
             }
             .ScheduleParallel();
 

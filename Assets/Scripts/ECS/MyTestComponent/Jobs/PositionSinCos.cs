@@ -23,7 +23,7 @@ namespace Game.Jobs
                 .LocalPosition = new float3 {
                     x = ro.targetPosition.x + math.sin(Time) * Radius,
                     y = ro.targetPosition.y + math.cos(Time) * Radius,
-                    z = ro.targetPosition.z // + math.tan(Time) * Radius
+                    z = ro.targetPosition.z + math.tan(Time) * Radius
                 };
         }
     }
