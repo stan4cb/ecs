@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9372cbd9ba8c43d43bd58060a8e6d1a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCount: 400
+  spawnCount: 500
   spawnRadius: 3
   scale:
     x: 0.5

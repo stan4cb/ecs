@@ -34,34 +34,6 @@ namespace Game
                 Time = (float)SystemAPI.Time.ElapsedTime,
                 Radius = sceneSetupAspect.sceneSetup.ValueRO.circleRadius,
             }.ScheduleParallel();
-
-            /*new Jobs.GoUp
-            {
-                Delta = SystemAPI.Time.DeltaTime,
-            }
-            .ScheduleParallel();
-            */
-
-            /*
-            new Jobs.LerpPosition
-            {
-                Delta = SystemAPI.Time.DeltaTime,
-            }.ScheduleParallel();
-            */
-
-            /*new Jobs.LerpPositionSin
-            {
-                Time = (float)SystemAPI.Time.ElapsedTime
-            }
-            .ScheduleParallel();
-            */
-
-            /*new Jobs.SinScale
-            {
-                Time = (float)SystemAPI.Time.ElapsedTime
-            }
-            .ScheduleParallel();
-            */
         }
     }
 }

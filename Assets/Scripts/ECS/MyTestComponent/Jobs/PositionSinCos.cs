@@ -1,5 +1,6 @@
 using Unity.Burst;
 using Unity.Entities;
+using Unity.Transforms;
 using Unity.Mathematics;
 
 namespace Game.Jobs
@@ -12,19 +13,14 @@ namespace Game.Jobs
         public float Radius;
 
         [BurstCompile]
-        private void Execute(MyTestComponentAspect myTestComponentAspect)
+        private void Execute(ref LocalTransform localTransform, in MyTestComponent mtc)
         {
-            var ro = myTestComponentAspect
-                .myTestComponent
-                .ValueRO;
-
-            myTestComponentAspect
-                .transformAspect
-                .LocalPosition = new float3 {
-                    x = ro.targetPosition.x + math.sin(Time) * Radius,
-                    y = ro.targetPosition.y + math.cos(Time) * Radius,
-                    z = ro.targetPosition.z + math.tan(Time) * Radius
-                };
+            localTransform = localTransform.WithPosition(new float3
+            {
+                x = mtc.targetPosition.x + math.sin(Time) * Radius,
+                y = mtc.targetPosition.y + math.cos(Time) * Radius,
+                z = mtc.targetPosition.z + math.tan(Time) * Radius
+            });
         }
     }
 }
