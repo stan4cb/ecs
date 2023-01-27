@@ -19,6 +19,22 @@ namespace Game
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
+            var sceneSetup = SystemAPI.GetSingletonEntity<SceneSetup>();
+            var sceneSetupAspect = SystemAPI.GetAspectRW<SceneSetupAspect>(sceneSetup);
+
+
+            new Jobs.LerpRotationSin
+            {
+                Time = (float)SystemAPI.Time.ElapsedTime
+            }
+            .ScheduleParallel();
+
+            new Jobs.PositionSinCos
+            {
+                Time = (float)SystemAPI.Time.ElapsedTime,
+                Radius = sceneSetupAspect.sceneSetup.ValueRO.circleRadius,
+            }.ScheduleParallel();
+
             /*new Jobs.GoUp
             {
                 Delta = SystemAPI.Time.DeltaTime,
@@ -33,23 +49,19 @@ namespace Game
             }.ScheduleParallel();
             */
 
-            new Jobs.LerpRotationSin
+            /*new Jobs.LerpPositionSin
             {
                 Time = (float)SystemAPI.Time.ElapsedTime
             }
             .ScheduleParallel();
+            */
 
-            new Jobs.LerpPositionSin
+            /*new Jobs.SinScale
             {
                 Time = (float)SystemAPI.Time.ElapsedTime
             }
             .ScheduleParallel();
-
-            new Jobs.SinScale
-            {
-                Time = (float)SystemAPI.Time.ElapsedTime
-            }
-            .ScheduleParallel();
+            */
         }
     }
 }

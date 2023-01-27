@@ -6,9 +6,11 @@ public class SceneSetupMono : MonoBehaviour
 {
     public int spawnCount = 100;
 
+    public float spawnRadius;
+
     public float2 scale;
 
-    public float3 min, max;
+    public float circleRadius;
 
     public GameObject toSpawn;
     
@@ -22,8 +24,9 @@ public class SceneSetupMono : MonoBehaviour
 
                 scale = authoring.scale,
 
-                min = authoring.min,
-                max = authoring.max,
+                spawnRadius = authoring.spawnRadius,
+
+                circleRadius = authoring.circleRadius,
 
                 toSpawn = GetEntity(authoring.toSpawn)
             });

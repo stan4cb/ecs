@@ -38,7 +38,7 @@ public partial struct SceneSetupSystem : ISystem
 
                 isForward = true,
 
-                targetPosition = sceneSetupAspect.random.ValueRW.myRandom.NextFloat3(roScene.min, roScene.max),
+                targetPosition = sceneSetupAspect.random.ValueRW.myRandom.NextFloat3Direction() * roScene.spawnRadius,
                 targetScale = sceneSetupAspect.random.ValueRW.myRandom.NextFloat(roScene.scale.x, roScene.scale.y),
                 targetRotation = sceneSetupAspect.random.ValueRW.myRandom.NextQuaternionRotation(),
             };
@@ -51,8 +51,8 @@ public partial struct SceneSetupSystem : ISystem
                     //Position = float3.zero,
                     Position = mtComponent.targetPosition,
                     Rotation = sceneSetupAspect.random.ValueRW.myRandom.NextQuaternionRotation(),
-                    //Scale = mtComponent.targetScale,
-                    Scale = 0f,
+                    Scale = mtComponent.targetScale,
+                    //Scale = 0f,
                 });
         }
 

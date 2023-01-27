@@ -5,9 +5,10 @@ public struct SceneSetup : IComponentData
 {
     public int spawnCount;
 
+    public float spawnRadius;
     public float2 scale;
 
-    public float3 min, max;
+    public float circleRadius;
 
     public Entity toSpawn;
 }
