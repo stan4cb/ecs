@@ -11,10 +11,14 @@ using Unity.Rendering;
 [UpdateInGroup(typeof(InitializationSystemGroup))]
 public partial struct SceneSetupSystem : ISystem
 {
+    EntityQuery queryHasMaterial;
+
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<SceneSetup>();
+
+        queryHasMaterial = state.GetEntityQuery(ComponentType.ReadOnly<RenderBounds>());
     }
 
     [BurstCompile]
@@ -24,9 +28,6 @@ public partial struct SceneSetupSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         state.Enabled = false;
-
-        var hasMaterial = state.GetEntityQuery(ComponentType.ReadOnly<RenderBounds>());
-        var addRandomColorQuery = hasMaterial.GetEntityQueryMask();
 
         var sceneSetup = SystemAPI.GetSingletonEntity<SceneSetup>();
         var sceneSetupAspect = SystemAPI.GetAspectRW<SceneSetupAspect>(sceneSetup);
@@ -71,7 +72,7 @@ public partial struct SceneSetupSystem : ISystem
                     //Scale = 0f,
                 });
 
-            ecb.AddComponentForLinkedEntityGroup(entity, addRandomColorQuery, randomColorComp);
+            ecb.AddComponentForLinkedEntityGroup(entity, queryHasMaterial.GetEntityQueryMask(), randomColorComp);
         }
     }
 }

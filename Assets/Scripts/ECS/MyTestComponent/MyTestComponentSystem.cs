@@ -5,7 +5,6 @@ using Unity.Transforms;
 namespace Game
 {
     [BurstCompile]
-    [CreateAfter(typeof(SceneSetup))]
     [UpdateInGroup(typeof(SimulationSystemGroup))]
     [UpdateBefore(typeof(TransformSystemGroup))]
     public partial struct MyTestComponentSystem : ISystem
