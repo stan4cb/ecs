@@ -167,10 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9372cbd9ba8c43d43bd58060a8e6d1a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCount: 500
+  spawnCount: 10000
   spawnRadius: 3
   scale:
-    x: 0.5
-    y: 1
+    x: 0.05
+    y: 0.2
   circleRadius: 2.5
   toSpawn: {fileID: 8154924627693198121, guid: 353d974d29404d54581bd5051bb33481, type: 3}

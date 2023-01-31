@@ -19,7 +19,7 @@ namespace Game.Jobs
             {
                 x = mtc.targetPosition.x + math.sin(Time) * Radius,
                 y = mtc.targetPosition.y + math.cos(Time) * Radius,
-                z = mtc.targetPosition.z + math.tan(Time) * Radius
+                z = mtc.targetPosition.z + math.tan(Time * .5f) * Radius
             });
         }
     }
