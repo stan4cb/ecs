@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using Unity.Collections;
 using Unity.VisualScripting.FullSerializer;
 using static UnityEngine.EventSystems.EventTrigger;
+using Unity.Rendering;
 
 [BurstCompile]
 [UpdateInGroup(typeof(InitializationSystemGroup))]
@@ -23,6 +24,9 @@ public partial struct SceneSetupSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         state.Enabled = false;
+
+        var hasMaterial = state.GetEntityQuery(ComponentType.ReadOnly<RenderBounds>());
+        var addRandomColorQuery = hasMaterial.GetEntityQueryMask();
 
         var sceneSetup = SystemAPI.GetSingletonEntity<SceneSetup>();
         var sceneSetupAspect = SystemAPI.GetAspectRW<SceneSetupAspect>(sceneSetup);
@@ -50,7 +54,10 @@ public partial struct SceneSetupSystem : ISystem
                 targetRotation = sceneSetupAspect.random.ValueRW.myRandom.NextQuaternionRotation(),
             };
 
-            //var randomColorComp = new ;
+            var randomColorComp = new MyColorComponent
+            {
+                Value = sceneSetupAspect.random.ValueRW.myRandom.NextFloat4()
+            };
 
             ecb.AddComponent(entity, mtComponent);
 
@@ -64,22 +71,7 @@ public partial struct SceneSetupSystem : ISystem
                     //Scale = 0f,
                 });
 
-            //ecb.AddComponentForLinkedEntityGroup<>
+            ecb.AddComponentForLinkedEntityGroup(entity, addRandomColorQuery, randomColorComp);
         }
-
-        /*
-
-        var all_entities = state.EntityManager.GetAllEntities(Unity.Collections.Allocator.Temp);
-
-        foreach(var entity in all_entities)
-        {
-            var buffer = SystemAPI.GetBuffer<Child>(entity);
-
-            foreach (var b in buffer)
-            {
-                Unity.Logging.Log.Debug("Buffer", b);
-            }
-        }
-        */
     }
 }
